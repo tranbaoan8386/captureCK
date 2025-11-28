@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Card, Button, message } from "antd";
+import { alert } from "../../components/util/alert";
 import UserTable from "../../components/admin/UserTable";
 import UserForm from "../../components/admin/UserForm";
 import EnrollModal from "../../components/admin/EnrollModal";
@@ -43,8 +44,9 @@ export default function UsersPage() {
   const handleDelete = async (record) => {
     try {
       await deleteUser.mutateAsync(record.taiKhoan);
+      alert.success("Đã xóa người dùng");
     } catch (e) {
-      message.error(e?.response?.data || "Xóa thất bại");
+      alert.error(e?.response?.data || "Xóa thất bại");
     }
   };
 
@@ -52,12 +54,14 @@ export default function UsersPage() {
     try {
       if (editUser) {
         await updateUser.mutateAsync({ ...editUser, ...formData, taiKhoan: editUser.taiKhoan });
+        alert.success("Đã cập nhật người dùng");
       } else {
         await addUser.mutateAsync(formData);
+        alert.success("Đã thêm người dùng");
       }
       setModalOpen(false);
     } catch (e) {
-      message.error(e?.response?.data || "Có lỗi xảy ra");
+      alert.error(e?.response?.data || "Có lỗi xảy ra");
     }
   };
 

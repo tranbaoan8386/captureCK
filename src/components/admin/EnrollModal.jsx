@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { Modal, Select, Button, Table, Divider, Space, message } from "antd";
+import { Modal, Select, Button, Table, Divider, Space } from "antd";
+import { alert } from "../util/alert";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { userService } from "../../service/userService";
 import { khoahocService } from "../../service/khoahocService";
@@ -95,33 +96,33 @@ export default function EnrollModal({ open, onClose, user }) {
   const muEnroll = useMutation({
     mutationFn: (payload) => userService.ghiDanhKhoaHoc(payload),
     onSuccess: () => {
-      message.success("Đã gửi yêu cầu ghi danh");
+      alert.success("Đã gửi yêu cầu ghi danh");
       setSelectedCourse(null);
       REFRESH();
     },
-    onError: (e) => message.error(e?.response?.data || "Ghi danh thất bại"),
+    onError: (e) => alert.error(e?.response?.data || "Ghi danh thất bại"),
   });
 
   const muApprove = useMutation({
     mutationFn: (payload) => userService.ghiDanhKhoaHoc(payload),
     onSuccess: () => {
-      message.success("Đã xác thực");
+      alert.success("Đã xác thực");
       setPWait(1);
       setPEnrolled(1);
       REFRESH();
     },
-    onError: (e) => message.error(e?.response?.data || "Xác thực thất bại"),
+    onError: (e) => alert.error(e?.response?.data || "Xác thực thất bại"),
   });
 
   const muCancel = useMutation({
     mutationFn: (payload) => userService.huyGhiDanh(payload),
     onSuccess: () => {
-      message.success("Đã xóa ghi danh");
+      alert.success("Đã xóa ghi danh");
       setPWait(1);
       setPEnrolled(1);
       REFRESH();
     },
-    onError: (e) => message.error(e?.response?.data || "Xóa ghi danh thất bại"),
+    onError: (e) => alert.error(e?.response?.data || "Xóa ghi danh thất bại"),
   });
 
   // 5) Columns 2 bảng
@@ -178,7 +179,7 @@ export default function EnrollModal({ open, onClose, user }) {
 
   // 6) Submit ghi danh
   const handleEnroll = () => {
-    if (!selectedCourse) return message.warning("Hãy chọn khóa học");
+    if (!selectedCourse) return alert.warning("Hãy chọn khóa học");
     muEnroll.mutate({ maKhoaHoc: selectedCourse, taiKhoan });
   };
 

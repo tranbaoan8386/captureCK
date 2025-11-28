@@ -10,8 +10,8 @@ import {
   DatePicker,
   InputNumber,
   Upload,
-  message,
 } from "antd";
+import { alert } from "../util/alert";
 import { useEffect, useState, useMemo } from "react";
 import { khoahocService } from "../../service/khoahocService";
 import { userService } from "../../service/userService";
@@ -70,7 +70,7 @@ export default function CourseForm({
       .then((res) => {
         const info = res?.data?.content || res?.data || {};
         if (info?.maLoaiNguoiDung !== "GV") {
-          message.error(
+          alert.error(
             "Tài khoản hiện tại không phải giảng viên. Không thể thêm/sửa khóa học."
           );
           onClose?.();
@@ -79,7 +79,7 @@ export default function CourseForm({
         form.setFieldsValue({ taiKhoanNguoiTao: info?.taiKhoan || "" });
       })
       .catch(() => {
-        message.error("Không lấy được thông tin tài khoản.");
+        alert.error("Không lấy được thông tin tài khoản.");
         onClose?.();
       })
       .finally(() => setLoadingInfo(false));

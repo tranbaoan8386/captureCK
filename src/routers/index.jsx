@@ -124,7 +124,7 @@ const routers = [
   {
     path: "/admin",
     element: (
-      <AuthCheck requireAdmin>
+      <AuthCheck requireAdmin isNeedLogin={true}>
         <AdminTemplate />
       </AuthCheck>
     ),
