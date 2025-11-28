@@ -7,7 +7,7 @@ import {
   keyLocalStorage,
   localStorageUtil,
 } from "../../components/util/localStorage";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { setListMaNhom } from "../../stores/manhom";
 import { khoahocService } from "../../service/khoahocService";

@@ -77,7 +77,10 @@ const HeaderPage = () => {
     <header className="w-full">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-1 py-7">
         {/* Logo */}
-        <div className="flex flex-col leading-tight">
+        <div
+          className="flex flex-col leading-tight"
+          onClick={() => navigate("/")}
+        >
           <span className="text-2xl font-bold text-yellow-600">CYBERSOFT</span>
           <span className="text-xs text-gray-500">
             ĐÀO TẠO CHUYÊN GIA LẬP TRÌNH
@@ -158,7 +161,7 @@ const HeaderPage = () => {
             <>
               <span
                 onClick={handleRedirectInfoUser}
-                className="flex items-center gap-2 text-gray-700"
+                className="flex items-center gap-2 text-gray-700 "
               >
                 <UserOutlined /> {infoUser.hoTen || "Người dùng"}
               </span>
@@ -209,7 +212,10 @@ const HeaderPage = () => {
                 {listDanhMuc?.map((dm) => (
                   <a
                     key={dm.maDanhMuc}
-                    href="#"
+                    onClick={() => {
+                      handleRedirectDanhMucPage(dm.maDanhMuc);
+                      setOpenMenu(false);
+                    }}
                     className="block hover:text-yellow-600"
                   >
                     {dm.tenDanhMuc}
@@ -220,19 +226,43 @@ const HeaderPage = () => {
           </div>
 
           {/* KHÓA HỌC */}
-          <a href="#" className="block hover:text-yellow-600">
+          <a
+            onClick={() => {
+              handleRedirectKhoaHocPhanTrang();
+              setOpenMenu(false);
+            }}
+            className="block hover:text-yellow-600"
+          >
             KHÓA HỌC
           </a>
-          <a href="#" className="block hover:text-yellow-600">
+          <a
+            onClick={() => {
+              handleRedirectBlog();
+              setOpenMenu(false);
+            }}
+            className="block hover:text-yellow-600"
+          >
             BLOG
           </a>
-          <a href="#" className="block hover:text-yellow-600">
+          <a
+            onClick={() => {
+              handleRedirectEven();
+              setOpenMenu(false);
+            }}
+            className="block hover:text-yellow-600"
+          >
             SỰ KIỆN
           </a>
-          <a href="#" className="block hover:text-yellow-600">
+          <a
+            onClick={() => {
+              handleRedirectInfoVlearningPage();
+              setOpenMenu(false);
+            }}
+            className="block hover:text-yellow-600"
+          >
             THÔNG TIN
           </a>
-            {infoUser?.maLoaiNguoiDung === "GV" && (
+          {infoUser?.maLoaiNguoiDung === "GV" && (
             <button
               onClick={() => navigate("/admin/quanlynguoidung")}
               className="w-full flex items-center justify-center gap-1 bg-teal-600 hover:bg-teal-700 text-white font-semibold px-4 py-2 rounded"

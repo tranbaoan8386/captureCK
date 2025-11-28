@@ -32,7 +32,7 @@ const routers = [
       {
         path: "/detail/:khoahocId",
         element: (
-          <AuthCheck>
+          <AuthCheck isNeedLogin={true}>
             <KhoaHocDetail />
           </AuthCheck>
         ),
@@ -40,7 +40,7 @@ const routers = [
       {
         path: "/danhmuckhoahoc/:danhmucId",
         element: (
-          <AuthCheck>
+          <AuthCheck isNeedLogin={true}>
             <DanhMucPage />
           </AuthCheck>
         ),
@@ -48,7 +48,7 @@ const routers = [
       {
         path: "/khoahoc",
         element: (
-          <AuthCheck>
+          <AuthCheck isNeedLogin={true}>
             <KhoaHocPhanTrangPage />
           </AuthCheck>
         ),
@@ -56,7 +56,7 @@ const routers = [
       {
         path: "/infoUser",
         element: (
-          <AuthCheck>
+          <AuthCheck isNeedLogin={true}>
             <InfoUser />
           </AuthCheck>
         ),
@@ -64,7 +64,7 @@ const routers = [
       {
         path: "/info-khoa-hoc-user",
         element: (
-          <AuthCheck>
+          <AuthCheck isNeedLogin={true}>
             <InfoKhoaHocUser />
           </AuthCheck>
         ),
@@ -72,7 +72,7 @@ const routers = [
       {
         path: "/info-update",
         element: (
-          <AuthCheck>
+          <AuthCheck isNeedLogin={true}>
             <InfoUserUpdate />
           </AuthCheck>
         ),
@@ -80,7 +80,7 @@ const routers = [
       {
         path: "/blog",
         element: (
-          <AuthCheck>
+          <AuthCheck isNeedLogin={true}>
             <BlogListPage />
           </AuthCheck>
         ),
@@ -88,7 +88,7 @@ const routers = [
       {
         path: "/event",
         element: (
-          <AuthCheck>
+          <AuthCheck isNeedLogin={true}>
             <EvenPage />
           </AuthCheck>
         ),
@@ -96,7 +96,7 @@ const routers = [
       {
         path: "/thongtin",
         element: (
-          <AuthCheck>
+          <AuthCheck isNeedLogin={true}>
             <InfoElerningPage />
           </AuthCheck>
         ),
@@ -111,7 +111,11 @@ const routers = [
     child: [
       {
         path: "/login",
-        element: <LoginPage />,
+        element: (
+          <AuthCheck isNeedLogin={false}>
+            <LoginPage />
+          </AuthCheck>
+        ),
       },
     ],
   },
