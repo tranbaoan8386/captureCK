@@ -77,14 +77,13 @@ const HeaderPage = () => {
     <header className="w-full">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-1 py-7">
         {/* Logo */}
-        <div
-          className="flex flex-col leading-tight"
-          onClick={() => navigate("/")}
-        >
-          <span className="text-2xl font-bold text-yellow-600">CYBERSOFT</span>
-          <span className="text-xs text-gray-500">
-            ĐÀO TẠO CHUYÊN GIA LẬP TRÌNH
-          </span>
+        <div className="flex items-center mb-4">
+          <h2
+            className="text-2xl font-bold  flex items-center transform hover:scale-105 duration-800"
+            style={{ textShadow: "5px -2px 3px #54d2c0" }}
+          >
+            <span className="mr-1 text-teal-600 text-5xl ">V</span>learning
+          </h2>
         </div>
 
         {/* Search */}
