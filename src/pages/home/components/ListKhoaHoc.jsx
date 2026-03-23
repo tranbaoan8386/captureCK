@@ -55,7 +55,7 @@ const ListKhoaHoc = () => {
   const pageSize = 4;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-screen-xl mx-auto px-4 py-8">
       {Object.keys(groupByCategory).map((category) => {
         const courses = groupByCategory[category];
         const currentPage = pageByCategory[category] || 1;
