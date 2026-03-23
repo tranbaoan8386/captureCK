@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { Modal, Select, Button, Table, Space, Divider, message } from "antd";
+import { Modal, Select, Button, Table, Space, Divider } from "antd";
+import { alert } from "../util/alert";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { userService } from "../../service/userService";
 import SearchInput from "./parts/SearchInput";
@@ -87,32 +88,32 @@ export default function CourseEnrollModal({ open, onClose, course, currentAdminT
   const muEnroll = useMutation({
     mutationFn: ({ taiKhoan }) => userService.ghiDanhKhoaHoc({ maKhoaHoc, taiKhoan }),
     onSuccess: () => {
-      message.success("Đã gửi ghi danh");
+      alert.success("Đã gửi ghi danh");
       setChosenUser(null);
       REFRESH();
     },
-    onError: (e) => message.error(e?.response?.data || "Ghi danh thất bại"),
+    onError: (e) => alert.error(e?.response?.data || "Ghi danh thất bại"),
   });
 
   const muApprove = useMutation({
     mutationFn: ({ taiKhoan }) => userService.ghiDanhKhoaHoc({ maKhoaHoc, taiKhoan }),
     onSuccess: () => {
-      message.success("Đã xác thực");
+      alert.success("Đã xác thực");
       setPWait(1);
       REFRESH();
     },
-    onError: (e) => message.error(e?.response?.data || "Xác thực thất bại"),
+    onError: (e) => alert.error(e?.response?.data || "Xác thực thất bại"),
   });
 
   // Hủy ghi danh (xóa) từ cả 2 bảng
   const muRemove = useMutation({
     mutationFn: ({ taiKhoan }) => userService.huyGhiDanh({ maKhoaHoc, taiKhoan }),
     onSuccess: () => {
-      message.success("Đã xóa ghi danh");
+      alert.success("Đã xóa ghi danh");
       setPWait(1); setPJoined(1);
       REFRESH();
     },
-    onError: (e) => message.error(e?.response?.data || "Xóa ghi danh thất bại"),
+    onError: (e) => alert.error(e?.response?.data || "Xóa ghi danh thất bại"),
   });
 
   /* ========== TABLE COLUMNS ========== */
@@ -191,7 +192,7 @@ export default function CourseEnrollModal({ open, onClose, course, currentAdminT
           size="large"
           loading={muEnroll.isLoading}
           onClick={() => {
-            if (!chosenUser) return message.warning("Chọn người dùng trước đã");
+            if (!chosenUser) return alert.warning("Chọn người dùng trước đã");
             muEnroll.mutate({ taiKhoan: chosenUser });
           }}
         >

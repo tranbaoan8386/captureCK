@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Card, Button, message } from "antd";
+import { alert } from "../../components/util/alert";
 import { khoahocService } from "../../service/khoahocService";
 import CourseTable from "../../components/admin/CourseTable";
 import CourseForm from "../../components/admin/CourseForm";
@@ -32,10 +33,10 @@ export default function CoursesPage() {
   const handleDelete = async (record) => {
     try {
       await khoahocService.xoaKhoaHoc(record.maKhoaHoc);
-      message.success("Đã xóa khóa học");
+      alert.success("Đã xóa khóa học");
       refetch();
     } catch (e) {
-      message.error(e?.response?.data || "Xóa thất bại");
+      alert.error(e?.response?.data || "Xóa thất bại");
     }
   };
 
@@ -55,31 +56,18 @@ export default function CoursesPage() {
         taiKhoanNguoiTao: formData.taiKhoanNguoiTao,
       };
 
-      const chosenFile = formData?.file instanceof File ? formData.file : null;
-
       if (editing) {
-        if (chosenFile) {
-          const fd = new FormData();
-          fd.append("frm", JSON.stringify(payload));
-          fd.append("File", chosenFile);
-          await khoahocService.capNhatKhoaHocUpload(fd);
-        } else {
-          await khoahocService.capNhatKhoaHoc(payload);
-        }
-        message.success("Đã cập nhật khóa học");
+        await khoahocService.capNhatKhoaHoc(payload);
+        alert.success("Đã cập nhật khóa học");
       } else {
-        if (chosenFile) {
-          await khoahocService.themKhoaHocUploadHinh({ payload, file: chosenFile });
-        } else {
-          await khoahocService.themKhoaHoc(payload);
-        }
-        message.success("Đã thêm khóa học");
+        await khoahocService.themKhoaHoc(payload);
+        alert.success("Đã thêm khóa học");
       }
 
       setModalOpen(false);
       await refetch();
     } catch (e) {
-      message.error(e?.response?.data || (editing ? "Cập nhật thất bại" : "Thêm thất bại"));
+      alert.error(e?.response?.data || (editing ? "Cập nhật thất bại" : "Thêm thất bại"));
     }
   };
 
